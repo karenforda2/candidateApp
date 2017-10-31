@@ -1,15 +1,16 @@
 <div class="container">
 	<header>
-		<h1>Sample App</h1>
+		<h1>Candidate App</h1>
 	</header>
 	
-	<h2>Results</h2>
-		
-
+	<h2>Candidates:</h2>
+	
 	<div *ngFor="let candidate of candidates">
 		<div>
 			<label>{{ candidate.firstName }}</label>
 			<label>{{ candidate.lastName }}</label>
+			<label>{{ candidate.phoneNumber }}</label>
+			
 		</div>
 	</div>
 	<div>

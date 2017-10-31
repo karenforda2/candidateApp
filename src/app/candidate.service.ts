@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CandidateService {
@@ -16,9 +17,9 @@ export class CandidateService {
              .catch(this.handleError);
 	}
 
-	create(firstName: string, lastName: string): Promise<Candidate> {
+	create(formGroup: FormGroup): Promise<Candidate> {
   		return this.http
-		.post(this.heroesUrl, JSON.stringify({firstName: firstName, lastName: lastName}))
+		.post(this.heroesUrl, JSON.stringify({firstName: formGroup.controls.fname.value, lastName: formGroup.controls.lname.value, phoneNumber: formGroup.controls.phone.value}))
 		.toPromise()
 		.then(res => res.json().data as Candidate)
 		.catch(this.handleError);
@@ -28,10 +29,10 @@ export class CandidateService {
 		console.error('An error occurred', error); // for demo purposes only
   		return Promise.reject(error.message || error);
 	}
-
 }
 
 export class Candidate {
 	firstName: string;
 	lastName: string;
+	phoneNumber: string;
 }
